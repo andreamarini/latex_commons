@@ -8,10 +8,10 @@ BASE  := /home/marini/Papers_and_Results
 DROP  := " "
 BIB   := paper.bib
 PAPER := paper.tex
-POSTER:= " "
-SUPP  := " "
-arxive:= " "
-FIGS  := Fig1.pdf
+POSTER:= poster.tex
+SUPP  := SM.tex
+arxive:= arxive.tex
+FIGS  := " "
 
 #=========================================================
 #make stuff

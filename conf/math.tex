@@ -1,0 +1,101 @@
+%
+% Parenthesis and Math symbols
+% Keep \[...\] and \(...\) as the standard LaTeX display/inline math delimiters.
+% Redefining them breaks every ordinary math environment in the document.
+\renewcommand{\[}{\left[}
+\renewcommand{\]}{\right]}
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\def\nl         {\right.\\ \left.}
+\def\la         {\left\langle}
+\def\ra         {\right\rangle}
+\def\dg         {\dagger}
+%
+% Arrows
+\def\dn         {\downarrow}
+\def\up         {\uparrow}
+\def\lar        {\leftarrow}  
+\def\rar        {\rightarrow}  
+\def\Lal        {\Leftarrow}
+\def\Rar        {\Rightarrow}
+\def\lrar       {\Longrightarrow}  
+\def\llar       {\Longleftarrow}  
+\def\lrar       {\leftrightarrow}  
+\def\llrar      {\Longleftrightarrow}  
+\newcommand{\olrar}[1]{\overleftrightarrow{#1}}
+\newcommand{\urar}[1]{\underrightarrow{#1}}
+\newcommand{\orar}[1]{\overrightarrow{#1}}
+\newcommand{\olar}[1]{\overleftarrow{#1}}
+\newcommand{\mat}[1]{\underline{#1}}
+\newcommand{\tnsrleft}[1] {\overset\leftarrow{#1}}
+\newcommand{\tnsrright}[1] {\overset\rightarrow{#1}}
+\newcommand{\tnsr}[1] {\overset\leftrightarrow{#1}}
+%
+% Equations
+\newcommand{\eqn}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\eq}[1]{\begin{align}#1\end{align}}
+\newcommand{\ml}[1]{\begin{multline}#1\end{multline}}
+\newcommand{\eqgn}[1]{\begin{gather*}#1\end{gather*}}
+\newcommand{\eqg}[1]{\begin{gather}#1\end{gather}}
+\newcommand{\eqgd}[1]{\begin{equation}\begin{gathered}#1\end{gathered}\end{equation}}
+\newcommand{\eqs}[1]{\begin{equation}\begin{split}#1\end{split}\end{equation}}
+\newcommand{\seq}[1]{\begin{subequations}#1\end{subequations}}
+\newcommand{\sust}[2]{\substack{#1\\#2}}
+% ... + label
+\newcommand{\seql}[2]{\begin{subequations}\label{#1}#2\end{subequations}}
+\newcommand{\seqal}[2]{\begin{subequations}\label{#1}\begin{align}#2\end{align}\end{subequations}}
+\newcommand{\mll}[2]{\begin{multline}\label{#1}#2\end{multline}}
+\newcommand{\eql}[2]{\begin{align}\label{#1}#2\end{align}}
+\newcommand{\eqgl}[2]{\seq{\label{#1}\begin{gather}#2\end{gather}}}
+\newcommand{\eqgdl}[2]{\begin{equation}\begin{gathered}\label{#1}#2\end{gathered}\end{equation}}
+\newcommand{\eqsl}[2]{\begin{equation}\begin{split}\label{#1}#2\end{split}\end{equation}}
+%
+% Functions
+\newcommand\llim[2]{#1\xrightarrow[#2]{}}
+\newcommand\diag[2]{\ncline[linewidth=1pt,nodesep=-30pt]{#1}{#2}}
+\newcommand{\stkout}[1]{\ifmmode\text{\sout{\ensuremath{#1}}}\else\sout{#1}\fi}
+\newcommand{\average}[1]{\left\langle #1 \right\rangle}
+\newcommand{\phmod}[1]{\left| #1 \right|}
+\newcommand{\pr}[1]{\left( #1 \right)}
+\newcommand{\ps}[1]{\left[ #1 \right]}
+\newcommand{\bps}[1]{\biggl[ #1 \biggr]}
+\newcommand{\bpr}[1]{\biggl( #1 \biggr)}
+\newcommand{\bpg}[1]{\biggl\{ #1 \biggr\}}
+\newcommand{\lab}[1]{\label{#1}}
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\oo}[1]{\overline{#1}}
+\newcommand{\e}[1]{Eq.~\eqref{#1}}
+\newcommand{\es}[2]{Eqs.~\eqref{#1}--\eqref{#2}}
+\newcommand{\elab}[2]{Eq.(\ref{#1}#2)}
+\newcommand{\tab}[1]{Tab.\ref{#1}}
+\newcommand{\fig}[1]{Fig.\ref{#1}}
+\newcommand{\figlab}[2]{Fig.\ref{#1}#2}
+\newcommand{\evalat}[2]{\left.#1\right|_{#2}}
+\renewcommand{\sec}[1]{Section\,\ref{#1}}
+\newcommand{\app}[1]{Appendix\,\ref{#1}}
+\newcommand{\h}[1]{\hat{#1}}
+\newcommand{\ti}[1]{\tilde{#1}}
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\renewcommand{\t}[1]{\olrar{#1}}
+%\renewcommand{\v}[1]{\vec{#1}}
+\newcommand{\dint}[1] {{\rm d}^3 #1}
+\renewcommand{\b}[1]{{\bar #1}}
+\newcommand{\txtbox}[1]{\fbox{\parbox{\columnwidth}{\it #1}}}
+\newcommand{\mr}[1]{{\mathrm #1}}
+\newcommand{\ocite}[1]{Ref.\cite{#1}}
+%
+% Mathematical Symbols
+\def\de{\partial}
+\def\grad{\mbox{\boldmath $\nabla$}}
+\def\Tr{{\rm Tr}}
+\def\Re{{\rm Re}}
+\def\Im{{\rm Im}}
+%
+% Bits
+\newcommand{\p}{\prime}           % Differential d
+\renewcommand{\d}{\mr{d}}           % Differential d
+%
+\newcommand{\bxi}{\boldsymbol{\xi}}

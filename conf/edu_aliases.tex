@@ -1,0 +1,29 @@
+\newcommand{\SL}[2]{\,\cite{Leeuwen2013}, pages\,{#1}-{#2}}
+\newcommand{\FW}[2]{\,\cite{FW}, pages\,{#1}-{#2}}
+\newcommand{\SC}[2]{\,\cite{Schrieffer1999}, pages\,{#1}-{#2}}
+\newcommand{\MA}[2]{\,\cite{mattuck1992a}, pages\,{#1}-{#2}}
+\newcommand{\A}[2]{\,Nr. {#1}: {#2}}
+\newcommand{\N}[2]{\,Hand written notes {\normalfont\ttfamily {#1}.pdf}\,(#2 pages)}
+\newcommand{\V}[1]{Video {#1}}
+\newcommand{\OPT}[1]{({\em {#1} -- Optional topic})}
+\newcommand{\SEC}[1]{\,Sec. {#1}}
+\newcommand{\SECS}[2]{\,Sec. {#1}--{#2}}
+
+\newcommand{\lSEC}[1]{
+\setcounter{ssec}{0}
+\setcounter{sssec}{0}
+\addtocounter{sec}{1}
+\noindent\textbf{\large{\arabic{sec}. #1}}}
+
+\newcommand{\lIT}[1]{
+\addtocounter{ssec}{1}
+\setcounter{sssec}{0}
+\item[\arabic{sec}.\arabic{ssec}] #1}
+
+\newcommand{\lITT}[1]{
+\addtocounter{sssec}{1}
+\item[\arabic{sec}.\arabic{ssec}.\arabic{sssec}] #1}
+
+\newcounter{sec}
+\newcounter{ssec}
+\newcounter{sssec}

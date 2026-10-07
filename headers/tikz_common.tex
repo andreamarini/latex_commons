@@ -3,9 +3,17 @@
 \usepackage{tikz-feynman}
 \usepackage{array}
 \usepackage{amsmath}
+\usepackage{amssymb} % math symbols
+\usepackage{amsfonts} % math basic fonts
 \usepackage{luatex85}
+
 \usetikzlibrary{math}
 \usetikzlibrary{shapes,positioning}
+
+\usepackage[scr=dutchcal]{mathalpha}
+\usepackage{euscript}
+\input{headers/characters}
+
 \tikzset{%
   do path picture/.style={%
     path picture={%
@@ -16,28 +24,7 @@
       #1
     }
   },
-  cross/.style={do path picture={    
-    \draw [line cap=round] (-1,-1) -- (1,1) (-1,1) -- (1,-1);
-  }},
 }
- \tikzset{squarecross/.style={draw,path picture={% 
-      \draw[black!40!black]
-       (path picture bounding box.north west) -- (path picture bounding box.south east) 
-       (path picture bounding box.south west) -- (path picture bounding box.north east);
- }}}
-\tikzset{cross/.style={fill=white,path picture={ 
- \draw[circle];
- \draw[black]
-(path picture bounding box.south east) -- (path picture bounding box.north west) (path picture bounding box.south west) -- (path picture bounding box.north east);
-}}}
-
-%\tikzstyle{extj}=[draw,circle,path picture={
-%       (path picture bounding box.north west) -- (path picture bounding box.south east)
-%       (path picture bounding box.south west) -- (path picture bounding box.north east);}
-%]
-
-%\tikzstyle{mystyle}=[draw,circle,label={[fill=yellow]0:#1}]
-%\tikzstyle{mystyle}+=[fill=red,rectangle]
 
 \usepackage{fontspec}
 \setmainfont

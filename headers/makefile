@@ -1,8 +1,11 @@
+SIL   := -silent
+ifeq ($(VERB),1)
+  SIL := 
+endif
 #=========================================================
 LATEXMK := latexmk
 ERR   := -file-line-error 
-#INT   := -interaction=nonstopmode
-#SIL   := -silent
+INT   := -interaction=nonstopmode
 OPTS  := -pdf -pdflatex="pdflatex $(INT) $(ERR)" $(SIL) -f
 BASE  := /home/marini/Papers_and_Results
 DROP  := " "
@@ -50,7 +53,7 @@ dropbox:
 	@if test -d $(DROP); then rsync -avz --exclude '*.aux' --exclude '*.log' --exclude '*.bbl' --exclude '*.blg' --exclude '*.zip' --exclude '*.spl' $(DROP) .; fi
 
 bibsync:
-	@if test -f $(BASE)/bibliography.bib; then cat $(BASE)/bibliography.bib | sed s/\cc/\c\{c\}/g > base.bib ; fi
+	@if test -f $(BASE)/bibliography.bib; then cat $(BASE)/bibliography.bib > base.bib ; fi
 bib: bibsync
 	@if test ! -f local.bib; then echo "" > local.bib;fi
 	@if test -f local.bib; then cat base.bib local.bib > $(BIB);fi
@@ -76,12 +79,14 @@ clean-no-git:
 
 clean:
 	@$(LATEXMK) -CA
-	@(git ls-files --others | xargs rm -f)
+	@(git ls-files --others| sed 's/\ /\\\ /'| xargs rm -f)
 
 .SUFFIXES: .tikz .pdf
 
 .tikz.pdf:
-	@cp $*.tikz $*.tex && lualatex -interaction=nonstopmode -halt-on-error $*.tex; status=$$?; rm -f $*.tex $*.aux $*.log; exit $$status
+	cp $*.tikz $*.tex; lualatex -interaction=batchmode -halt-on-error $*.tex;\
+	rm -f $*.tex $*.aux $*.log; \
+	mv $$(basename $*.tikz | sed 's/\.tikz$$/.pdf/') Figs
 
 define check_length
  awk -f conf/length.awk $(1)

@@ -31,7 +31,7 @@ while (1)
 	endsw
 end
 if ( $?pat ) then
- find . -name "*.tex" | xargs grep  $pat | awk '{na=split($0,a,":");print a[1]}' | awk '\!seen[$0]++' | xargs gvim -p
+ find . -name "*.tex"| grep -v "unused" | xargs grep  $pat | awk '{na=split($0,a,":");print a[1]}' | awk '\!seen[$0]++' | xargs gvim -p
 endif
 if ( $?file ) then
  set str=`echo $file | sed 's/\.o/.F/'`

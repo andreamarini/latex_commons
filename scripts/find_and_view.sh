@@ -1,6 +1,6 @@
 #! /bin/tcsh
 #
-set temp=(`getopt -s tcsh -o g:p:f:h -- $argv:q`)
+set temp=(`getopt -s tcsh -o g:p:f:hv -- $argv:q`)
 if ($? != 0) then 
   echo "Terminating..." >/dev/stderr
   exit 1
@@ -10,6 +10,10 @@ eval set argv=\($temp:q\)
 #
 while (1)
 	switch($1:q)
+	case -v:
+ 		set view="yes"
+		shift 
+		breaksw
 	case -f:
  		set file=$2:q
 		shift; shift
@@ -31,10 +35,18 @@ while (1)
 	endsw
 end
 if ( $?pat ) then
- find . -name "*.tex"| grep -v "unused" | xargs grep  $pat | awk '{na=split($0,a,":");print a[1]}' | awk '\!seen[$0]++' | xargs gvim -p
+ if ( $?view ) then
+   find . -name "*.tex"| grep -v "unused" | xargs grep  $pat | awk '{na=split($0,a,":");print a[1]}' | awk '\!seen[$0]++' | xargs gvim -p
+ else
+   find . -name "*.tex"| grep -v "unused" | xargs grep  $pat 
+ endif
 endif
 if ( $?file ) then
  set str=`echo $file | sed 's/\.o/.F/'`
- f $str | xargs gvim -p
+ if ( $?view ) then
+   f $str | xargs gvim -p
+ else
+   f $str
+ endif
 endif
 

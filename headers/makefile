@@ -1,12 +1,13 @@
-SIL   := -silent
+SIL   := -silent -f
+CMP   := latexmk
+INT   := -interaction=batchmode
 ifeq ($(VERB),1)
-  SIL := 
+  SIL  := 
+  CMP  := pdflatex
+  INT  := -halt-on-error
 endif
 #=========================================================
-LATEXMK := latexmk
-ERR   := -file-line-error 
-INT   := -interaction=nonstopmode
-OPTS  := -pdf -pdflatex="pdflatex $(INT) $(ERR)" $(SIL) -f
+OPTS  :=  $(INT) $(SIL) 
 BASE  := /home/marini/Papers_and_Results
 DROP  := " "
 BIB   := paper.bib
@@ -39,8 +40,8 @@ help:
 
 poster: 
 	@echo ${POSTER} | awk '{gsub(".tex",".pdf");print}'|xargs rm -f
-	@$(LATEXMK) $(OPTS) $(POSTER)
-	@$(LATEXMK) $(OPTS) $(POSTER)
+	@$(CMP) $(OPTS) $(POSTER)
+	@$(CMP) $(OPTS) $(POSTER)
 
 length:
 	@$(call check_length,$(PAPER))
@@ -60,33 +61,33 @@ bib: bibsync
 
 main:
 	@echo ${PAPER} | awk '{gsub(".tex",".pdf");print}'|xargs rm -f
-	@$(LATEXMK) $(OPTS) $(PAPER)
-	@$(LATEXMK) $(OPTS) $(PAPER)
+	@$(CMP) $(OPTS) $(PAPER)
+	@$(CMP) $(OPTS) $(PAPER)
 
 figs: $(FIGS)
  
 sm:
 	@if test -f $(SUPP); then echo ${SUPP} | awk '{gsub(".tex",".pdf");print}'|xargs rm -f; fi
-	@if test -f $(SUPP); then $(LATEXMK) $(OPTS) $(SUPP); fi
-	@if test -f $(SUPP); then $(LATEXMK) $(OPTS) $(SUPP); fi
+	@if test -f $(SUPP); then $(CMP) $(OPTS) $(SUPP); fi
+	@if test -f $(SUPP); then $(CMP) $(OPTS) $(SUPP); fi
 
 arxive:
-	@if test -f $(arxive); then $(LATEXMK) $(OPTS) $(arxive); fi
-	@if test -f $(arxive); then $(LATEXMK) $(OPTS) $(arxive); fi
+	@if test -f $(arxive); then $(CMP) $(OPTS) $(arxive); fi
+	@if test -f $(arxive); then $(CMP) $(OPTS) $(arxive); fi
 
 clean-no-git:
 	@find -name '*.aux' -o -name '*.log' -o -name '*.bbl' -o -name '*.blg' -o -name '*.zip' -o -name '*.spl' | xargs -d '\n' rm -f
 
 clean:
-	@$(LATEXMK) -CA
+	@$(CMP) -CA
 	@(git ls-files --others| sed 's/\ /\\\ /'| xargs rm -f)
 
 .SUFFIXES: .tikz .pdf
 
 .tikz.pdf:
-	cp $*.tikz $*.tex; lualatex -interaction=batchmode -halt-on-error $*.tex;\
+	cp $*.tikz $*.tex; lualatex $(LSIL) $*.tex;\
 	rm -f $*.tex $*.aux $*.log; \
-	mv $$(basename $*.tikz | sed 's/\.tikz$$/.pdf/') Figs
+	mv $$(basename $*.tikz | sed 's/\.tikz$$/.pdf/') $$(dirname $*.tikz)
 
 define check_length
  awk -f conf/length.awk $(1)

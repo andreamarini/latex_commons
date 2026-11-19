@@ -104,7 +104,7 @@ endif
 if ( $?OVER ) then
  echo 'overwrite="yes"' >> find_and_replace.awk
 endif
-cat ./scripts/find_and_replace_engine.awk  >> find_and_replace.awk
+cat ./common/scripts/find_and_replace_engine.awk  >> find_and_replace.awk
 
 unalias cp
 unalias mv
